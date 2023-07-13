@@ -2,6 +2,9 @@
     - methods : functions within Classes
     - attributes : properties that a Class have
         - also known as instance variables
+
+    
+``` Overall Code Syntax ``` -----------------------------------------------------------------------------------------
     
     class Employee:
 
@@ -22,6 +25,24 @@
             self.pay = int(self.pay * self.raise_amount) # if self used, only instance raise_amount is modified
             # self.pay = int(self.pay * Employee.raise_amount) # if Employee used, all instance raise_amount modified
 
+        @classmethod
+        def set_raise_amt(cls, amount):
+            cls.raise_amount = amount
+
+
+        @classmethod # Alternative Constructor to parse string input
+        def from_string(cls, emp_string):
+            first, last, pay = emp_string.split('-')
+            return cls(first, last, pay)
+
+        @staticmethod
+        def is_workday(day):
+            # Monday = 0
+            # Sunday = 6
+            if day.weekday() == 5 or day.weekday() == 6:
+                return False
+            return True
+
 
 
     emp_1 = Employee("Lucas", "Leow", 10000)
@@ -30,7 +51,23 @@
 
     print(emp1.__dict__) # Accessing object namespace
     print(Employee.__dict__) # Accessing class namespace
+    
 
+    Employee.set_raise_amt(1.05)
+
+    str1 = "John-Doe-70000"
+    emp_parsed = Employee.from_string(str1) # Alternative Constructor concept (search below for details)
+
+
+    # Static method example(see below for details)
+    import datetime
+    mydate = datetime.date(2023, 7, 14)
+
+    print(Employee.is_workday(mydate))
+
+
+
+``` ----------------------------------------------------------------------------------------------------------------- ```
 
 
 
@@ -87,11 +124,70 @@
         
         emp_1.raise_amount = 1.05
             - only changes value for emp_1 instance
-            - creates raise_amount instance attribute for emp_1
+            - creates raise_amount instance variable for emp_1
                 - no longer dealing with the class variable
 
             * Important concept
                 - sometimes only want to change value for certain instance
                 - eg: increasing pay rate only for emp_1 instead of all Employees
 
+
+== 3 Class methods & Static methods ==
+    
+    -- Class methods --
+        - takes in class as 1st argument instead of instance (self) as 1st argument
+        - using @classmethod decorator
+        - convention is "cls" for class argument
+
+
+                @classmethod
+                def set_raise_amt(cls, amount):
+                    cls.raise_amount = amount
+
+
+                Employee.set_raise_amt(1.05)
+                    - alter class variable
+
+                emp1.set_raise_amt(1.05)
+                    - still alters class variable
+
+    
+    -- Class methods as alternative constructors -- 
+        - using class method to create objects
+        - eg: to parse string input into instance variables
+
+            str1 = "John-Doe-70000"
+            str2 = "Jane-Smith-30000"
+            str3 = "Bob-Michael-50000"
             
+        * convention is to prefix alternative constructor with "from"
+
+        @classmethod
+        def from_string(cls, emp_string):
+            first, last, pay = emp_string.split('-')
+            return cls(first, last, pay)
+
+        emp_parsed = Employee.from_string(str1)
+
+
+        -- Static Methods --
+            - Dont pass anything to method automatically (no self / cls)
+            - using @staticmethod decorator
+            - used when instance or class not required within class 
+                 - but work performed still relevant to class
+            - accessed using Class
+                - Employee.is_workday()
+
+
+            @staticmethod
+            def is_workday(day):
+                # Monday = 0
+                # Sunday = 6
+                if day.weekday() == 5 or day.weekday() == 6:
+                    return False
+                return True
+            
+            import datetime
+            mydate = datetime.date(2023, 7, 14)
+            print(Employee.is_workday(mydate))
+
