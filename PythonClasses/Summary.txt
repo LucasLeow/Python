@@ -4,21 +4,35 @@
         - also known as instance variables
     
     class Employee:
+
+        num_employees = 0
+        raise_amount = 1.04 # class variable
         
         def __init__(self, first, last, pay):
             self.first = first
             self.last = last
             self.pay = pay
             self.email = first + "." + last + "@company.com"
+            Employee.num_employees += 1 # Want to modify for all instances
 
         def get_fullName(self):
             return '{} {}'.format(self.first, self.last)
+
+        def apply_raise(self):
+            self.pay = int(self.pay * self.raise_amount) # if self used, only instance raise_amount is modified
+            # self.pay = int(self.pay * Employee.raise_amount) # if Employee used, all instance raise_amount modified
 
 
 
     emp_1 = Employee("Lucas", "Leow", 10000)
     print(emp_1.get_fullName)
     print(Employee.fullName(emp_1))
+
+    print(emp1.__dict__) # Accessing object namespace
+    print(Employee.__dict__) # Accessing class namespace
+
+
+
 
     - Class = blueprint for creating instances (objects)
 
@@ -33,3 +47,51 @@
 
         2) Through Class
             - Employee.get_fullName(emp1)
+
+
+== 2 Class Variables ==
+
+    - variables shared among all instance of class
+        eg:
+            - pay_raise
+            - num_students
+            - num_shapes
+            - num_animals
+            etc.
+
+    - Instance Variables -
+        - unique for each instance
+            - color
+            - size
+            - height
+            - age
+            etc.
+
+    - Access Class variables via:
+        - Class itself
+            Employee.raise_amount
+        - Instance of a Class
+            self.raise_amount
+                - will first check if the instance has the attribute
+                - next, will check if the class has attribute
+                - next, if inherited, will check parent class for attribute
+
+    - Access namespace of objects:
+        - print(emp1.__dict__)
+
+
+    ** Modifying Class Variables **
+
+        Employee.raise_amount = 1.05
+            - changes value for all instances
+        
+        emp_1.raise_amount = 1.05
+            - only changes value for emp_1 instance
+            - creates raise_amount instance attribute for emp_1
+                - no longer dealing with the class variable
+
+            * Important concept
+                - sometimes only want to change value for certain instance
+                - eg: increasing pay rate only for emp_1 instead of all Employees
+
+            
