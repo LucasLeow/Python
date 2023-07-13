@@ -1,0 +1,35 @@
+== 1 Classes & Instances ==
+    - methods : functions within Classes
+    - attributes : properties that a Class have
+        - also known as instance variables
+    
+    class Employee:
+        
+        def __init__(self, first, last, pay):
+            self.first = first
+            self.last = last
+            self.pay = pay
+            self.email = first + "." + last + "@company.com"
+
+        def get_fullName(self):
+            return '{} {}'.format(self.first, self.last)
+
+
+
+    emp_1 = Employee("Lucas", "Leow", 10000)
+    print(emp_1.get_fullName)
+    print(Employee.fullName(emp_1))
+
+    - Class = blueprint for creating instances (objects)
+
+    - __init__ is used as constructor for python Classes
+    - when creating methods within class, it receives instance of class as first argument automatically
+        - by convention, named as "self"
+
+    - 2 ways to call methods:
+
+        1) Through each instance
+            - emp1.get_fullName()
+
+        2) Through Class
+            - Employee.get_fullName(emp1)
