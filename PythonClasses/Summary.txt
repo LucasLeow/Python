@@ -191,3 +191,58 @@
             mydate = datetime.date(2023, 7, 14)
             print(Employee.is_workday(mydate))
 
+== 4 Inheritance ==
+    - get attributes & methods from parent class
+    - can override parent class methods for own more specific implementation
+    
+
+    class Developer(Employee):
+        raise_amt = 1.1 # Developer class raise_amt does not affect parent class raise_amt
+        
+        def __init__(self, first, last, pay, prog_lang):
+            super().__init__(first, last, pay)
+            # Employee.__init__(self, first, last, pay) Also valid but not typically used
+            self.prog_lang = prog_lang
+
+    class Manager(Employee):
+        def __init__(self, first, last, pay, employees=None):
+            super().__init__(first, last, pay)
+            if employees is None:
+                self.employees = []
+            else:
+                self.employees = employees
+        
+        def add_employee(self, emp):
+            if emp not in self.employees:
+                self.employees.append(emp)
+
+        def remove_employee(self, emp):
+            if emp in self.employees:
+                self.employees.remove(emp)
+        
+        def print_emps(self):
+            for emp in self.employees:
+                print("-->", emp.get_fullName())
+            
+    # * Not recommended to pass mutable datatype (list) as arguments
+
+
+    dev_1 = Developer("Lucas", "Leow", 60000, "Python")
+    dev_2 = Developer("Tom", "Tim", 40000, "Java")
+    mgr_1 = Manager("Sue", "Ann", 80000, [dev_1])
+    mgr_1.add_employee(dev_2)
+
+    print(mgr_1.email)
+    mgr_1.print_emps()
+
+
+    -- isinstance --
+        - tells if object is instance of a class
+        print(isinstance(mgr_1, Manager)) : True
+        print(isinstance(mgr_1, Employee)) : True
+        print(isinstance(mgr_1, Developer)) : False
+
+    -- issubclass --
+        - tells if object is subclass of a parent class
+        print(issubclass(Manager, Developer)) : False
+        print(issubclass(Manager, Employee)) : True
