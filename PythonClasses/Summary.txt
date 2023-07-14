@@ -246,3 +246,61 @@
         - tells if object is subclass of a parent class
         print(issubclass(Manager, Developer)) : False
         print(issubclass(Manager, Employee)) : True
+
+
+== 5 Special Methods within Classes ==
+
+    - also known as Magic / Dunder methods
+    - technique to implement operator overloading
+    
+    - function always surrounded with "__"
+        eg: __init__
+            - known as dunder
+            dunder init means __init__
+        
+    2 common special methods for objects:
+
+            1) __repr__(self)
+                - representation of object (for debugging / logging)
+                - for developers
+
+            2) __str__(self)
+                - readable representation of object
+                - for end user
+
+            
+                def __repr__(self):
+                    return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
+                
+                def __str__(self):
+                    return "{} - {}".format(self.get_fullName(), self.email)
+                
+                emp_1 = Employee("Lucas", "Leow", 50000)
+
+                print(repr(emp_1))
+                print(str(emp_1))
+
+                print(emp_1.__repr__())
+                print(emp_1.__str__())
+
+
+        -- Operator Overloading --
+            
+            def __add__(self, other):
+                return self.pay + other.pay
+
+            def __len__(self):
+                return(len(self.get_fullName()))
+            
+            emp_1 = Employee("lucas", "leow", 50000)
+            emp_2 = Employee("Timmy", "Tan", 30000)
+
+            print(emp_1 + emp_2) # Output will be 80000
+                # if not overloaded with __add__, object addition throws an error 
+            
+            print(len(emp_1)) # prints len of full name = 9 since len overload with __len__
+                - if method not overload, error thrown: Object type has no method len
+
+        ** Datetime utilize operator overloading to sum datetimes
+
+            
