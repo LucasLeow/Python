@@ -268,7 +268,8 @@
                 - readable representation of object
                 - for end user
 
-            
+            for Employee class:
+
                 def __repr__(self):
                     return "Employee('{}', '{}', '{}')".format(self.first, self.last, self.pay)
                 
@@ -286,6 +287,8 @@
 
         -- Operator Overloading --
             
+        for Employee class:
+
             def __add__(self, other):
                 return self.pay + other.pay
 
@@ -303,4 +306,36 @@
 
         ** Datetime utilize operator overloading to sum datetimes
 
-            
+
+== 6 Property Decorator ==
+    - allow a method to be accessed like an attribute
+    - i.e don't have to include () like a method
+
+    eg: emp_1 .email instead of emp_1.email()
+    
+
+    @property
+    def email(self):
+        return "{}.{}@email.com".format(self.first, self.last)
+
+    print(emp_1.email)
+
+    -- Setter function with @property decorator --
+        
+        @fullname.setter
+        def fullname(self, name_input):
+            first, last = name_input.split(' ')
+            self.first = first
+            self.last = last
+
+        emp_1.fullname = "Lucas Leow"
+        
+
+    -- Deleter function --  
+        @fullname.deleter
+        def fullname(self):
+            print("deleting name")
+            self.first = None
+            self.last = None
+
+        del emp_1.fullname
