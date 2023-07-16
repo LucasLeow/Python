@@ -1,0 +1,17 @@
+-- Creating virtual envs --
+    conda create -n "myenv" python=3.9
+    pip install pandas
+
+-- Setting rows / columns display --
+pd.set_option('max_columns', None)
+pd.set_option('max_columns', 2)
+pd.set_option("max_rows", None)
+pd.set_option("max_rows", 2)
+
+
+import pandas as pd
+df = pd.read_csv("../datasets/survey_results_public.csv")
+df.head(5) # show top 5 records
+df.tail(5) # show last 5 records
+df.shape # show (rows, cols)
+
