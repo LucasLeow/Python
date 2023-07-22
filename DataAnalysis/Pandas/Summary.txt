@@ -135,4 +135,43 @@ df['Hobbyist'].value_counts() # provide count for categorical data
 
 
 == Filtering Data ==
-    
+    - getting data based on specific conditions
+
+
+    Technique 1:
+        1) Setup Filter Mask
+            - conditions that return true / false
+            filt = (df['last'] == 'Doe')
+            filt = (df['last'] == 'Doe') & (df['first'] == 'John')
+            filt = (df['last'] == 'Doe') | (df['first'] == 'John')
+
+        2) Apply filter mask to DF (multiple ways to do it)
+            2.1) df[filt]
+
+            2.2) df.loc[filt]
+                df.loc[filt, <col_name>]
+                df.loc[filt, [<col1>, <col2>]]
+                df.loc[~filt, <col1>]
+                    - ~ means not
+
+                high_salary_filt = (df['salary] > 70000)
+                df.loc[high_salary_filt, ['Country', 'LanguageWorkedWith', 'Salary']]
+
+            2.3) df[df['last'] == 'Doe']
+
+
+
+    Technique 2:
+        countries = ['United States', 'India', 'United Kingdom']
+        filt = df['country'].isin(countries)
+        df.loc[filt, 'country']
+
+
+
+    Technique 3:
+        filt = df['LanguageWorkedWith].str.contains('Python', na=False)
+            - for the column <LanguageWorkedWith>
+            - if 'Python' within this column, then return true
+            - na=False: Replace na values with False
+
+            "HTML/CSS;Java;JavaScript;Python"
