@@ -28,6 +28,10 @@ df.info() # show columns, no. of non-null data, dtype of column
 df.dtypes # show datatypes of columns
 
 
+df['YearsCode'].unique() # show all unique categories
+df['YearsCode'].nunique() # return count of unique categories
+
+
 
 
 

@@ -1,0 +1,78 @@
+== Corey Schafer Cleaning Data ==
+    * NaN values are 'float' under the hood.
+        type(NaN)
+
+        ** Converting custom null values to numpy NaN **
+            - during importing
+
+            na_vals = ["NA", "Missing", "N/A"]
+            df = pd.read_csv(<file_path>, index_col="Respondent", na_values=na_vals)
+
+    - Handling missing data
+        1) drop missing values
+            - not desirable unless very few missing data
+            - drop data = lesser data to work with
+
+                        df.dropna(inplace=True) # drop all rows with NaN values
+                        df.dropna(axis='index', how='any') # default arguments for dropna
+                            - axis: 'index' means drop rows, 'columns' means drop column instead of row
+                            - how: 'any' rows that have missing value. 'all': only drop rows if all data missing
+
+                                df.dropna(axis='index', how='all') # only drop row if all column missing
+                                df.dropna(axis='columns, how='all') # drop column if entire column have missing data
+
+            
+        1.1) dropping specific data
+            - eg: drop data only if email missing
+
+
+                        df.dropna(axis='index', how='any', subset=['email'])
+                            - drop rows only if data in 'email' col missing
+
+        
+    Handling "NA" / "missing" values (not NaN)
+        - sometimes, data provided have "NA" string or "missing" etc.
+        - must convert to NaN for pandas to manipulate with dropna()
+
+
+                        import numpy as np
+
+                        df.replace("NA", np.nan, inplace=True)
+                        df.replace("Missing", np.nan, inplace=True)
+
+        df.isna()
+            - show if data is NaN
+
+
+    2) replace missing data with other values
+        - set missing data = 0 etc.
+
+
+                    df.fillna("MISSING") # replace NaN value to "MISSING"
+
+                    df.fillna(0) # replace NaN value to 0 (more typically used)
+
+    
+
+- Casting Datatypes -
+    - Changing dtypes eg: cast string age to int age
+    - NaN is 'float' dtype under the hood, therefore must use float if NaN exist
+
+                df.dtypes # show dtypes of all columns
+
+                df['age'] = df['age'].astype(int) #if NaN exist, error thrown
+                df['age'] = df['age'].astype(float)
+
+
+
+    - Handling categorical data in numerical column
+        eg: "Less than 1 year" in 'Experience' column
+            
+                    df['YearsCode'].unique() # show all unique categories
+                    df['YearsCode'].nunique() # return count of unique categories
+
+                    df['YearsCode'].replace("Less than 1 year", 0, inplace=True)
+                    df['YearsCode'].replace("More than 50 years", 51, inplace=True)
+                        - subjective to set 51. Depends on domain knowledge
+                    
+                    df['YearsCode'] = df['YearsCode'].astype(float)
