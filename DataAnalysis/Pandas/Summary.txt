@@ -377,6 +377,89 @@ df['Hobbyist'].value_counts() # provide count for categorical data
 
 
 
-== Grouping & Aggregating ==
+== Statistical Functions & Grouping & Aggregating ==
     - working with some statistics
         - avg | sum | median etc.
+
+
+
+                df['Salary'].median() # calculate median from all non-NaN values
+                df.median() # calcuate median for all numerical cols
+
+                df.describe() # provides some statistical data on numerical data
+                df['Salary'].describe()
+                    - count: Number of non-NaN rows
+
+                df['Salary'].count() # count the number of non-NaN rows
+
+
+
+                - value_counts()
+                    - works on categorical dtype
+                    - count each number per category
+                
+                        df['Hobbyists'].value_counts()
+                        df['SocialMedia'].value_counts(normalize=True) # show in percentages
+
+
+
+
+            - Groupby function -
+                1) split object
+                2) apply function (statistical function typically)
+                3) combine results
+                
+
+                    1) Split Object
+                            country_grp = df.groupby(['Country'])
+                                - returns DataFrameGroupBy object
+                                - contains a bunch of group based on what col was grouped
+                            
+                            country_grp.get_group('United States')
+                                - must be valid category within 'Country' col specified in groupby
+            
+
+
+                    2) Apply Function
+
+                                    country_grp['SocialMedia'].value_counts().head(5)
+                                        - calculate the value_counts of Social Media for each country
+                                        - returns a series with multiple index
+                                            - primary index: Country (specified in the groupby)
+                                            - secondary index: SocialMedia (as requested in filter)
+                                        
+                                    country_grp['SocialMedia'].value_counts().loc['India']
+                                    country_grp['SocialMedia'].value_counts(normalize=True).loc['China'] # gives in percentages using normalize keyword
+
+
+                                    country_grp['Salary'].median() # gives median for all Countries
+                                    country_grp['Salary'].median().loc['Germany'] # gives median for Germany
+
+
+                                    country_grp['LanguageWorkedWith'].apply(lambda series: series.str.contains('Python').sum())
+
+                                    Challenge: Find percentage of python users
+                                    
+                                        total_users = df['Country'].value_counts()
+                                        python_users = df.groupby(['Country'])['LanguageWorkedWith'].apply(lambda series: series.str.contains('Python'))
+                                        combined_df = pd.concat([python_users, total_users], axis='columns')
+                                            - axis: concat by rows or columns.
+                                        combined_df.rename(columns={'Country':'NumRespondents', 'LanguageWorkedWith':'PythonUsers'}, inplace=True)
+                                        combined_df['percentage'] = str(combined_df['PythonUsers'] / combined_df['NumRespondents'] * 100) + '%' 
+                                        
+
+                        
+                    3) Combine Results
+                        - using .agg method to show consolidated results
+
+                            country_grp['Salary'].agg(['median', 'mean'])
+                                - provide list of desired functions to be applied on groupby object
+                                - all, any, bfill, backfill, count, cumcount, cummax, cummin, cumprod, cumsum, ffill, first, 
+                                head, last, max, mean, median, min, ngroup, nth, ohlc, pad, prod, rank, pct_change, size, sem,
+                                 std, sum, var, tail
+
+                            country_grp['Salary'].agg(['median', 'mean']).loc['Canada']
+
+
+
+
