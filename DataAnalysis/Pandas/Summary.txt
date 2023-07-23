@@ -340,3 +340,37 @@ df['Hobbyist'].value_counts() # provide count for categorical data
 
 
 
+== Sorting data using Pandas ==
+
+        - sort by values
+
+                df.sort_values(by='col1', ascending=False)
+                    - default ascend = True
+                
+
+                df.sort_values(by=['col1', 'col2'])
+                    - sort col1 ascending
+                    - then sort col2 ascending
+
+                df.sort_values(by=['col1', 'col2'], ascending=[False, True], inplace=True)
+                    - sort col1 descending
+                    - then sort col2 ascending
+                
+
+            - sort by index
+
+                        df.sort_index(inplace=True)
+
+
+            - sort single column / Series
+
+                        df['col1'].sort_values()
+
+
+                df.sort_values(by=['Country', 'Salary'], ascending=[True, False], inplace=True)
+
+                df['Salary'].nlargest(10) # get top 10 largest salary
+                df.nlargest(10, 'Salary') # works similar to above
+
+                df['Salary'].nsmallest(10) # get top 10 smallest salary
+                df.nsmallest(10, 'Salary') # works similar to above
