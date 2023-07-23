@@ -1,0 +1,18 @@
+- Anonymous functions (nameless)
+- typically used for short functions to perform short task
+
+lambda (parameters): (return expression)
+    - expression must fit on single line
+
+
+Normal Function:
+
+def func(x):
+    return x + 5
+
+Anonymous (lambda)
+
+func2 = lambda x: x+5
+
+
+

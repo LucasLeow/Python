@@ -374,3 +374,9 @@ df['Hobbyist'].value_counts() # provide count for categorical data
 
                 df['Salary'].nsmallest(10) # get top 10 smallest salary
                 df.nsmallest(10, 'Salary') # works similar to above
+
+
+
+== Grouping & Aggregating ==
+    - working with some statistics
+        - avg | sum | median etc.
