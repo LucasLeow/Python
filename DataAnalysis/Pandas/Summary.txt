@@ -295,4 +295,48 @@ df['Hobbyist'].value_counts() # provide count for categorical data
                 df['first'] = df['first'].replace({'Corey':'Chris', 'Jane':'Mary'})
 
 
+
+
+== Add / Remove Rows / Columns ==
             
+
+            Manipulating Columns
+
+                    - Adding/ creating columns
+                        * Cannot use dot notation for creating new columns
+
+                                df['new col'] = df['first'] + df['last']
+
+                    - Removing columns
+
+                                df.drop(columns=['col1', 'col2'], inplace=True)
+
+                    
+                    - Splitting columns into 2
+                        * based on whitespace delimiter, can be of any other delimiter
+
+                                    df[['first', 'last']] = df['full_name'].str.split(' ', expand=True)
+
+
+
+            Manipulating Rows
+
+                        - Adding Rows to DF
+
+                                    df.append({'first': 'Tony'}, ignore_index=True)
+
+
+                        - Adding 2 dataframe together
+
+                                    combined_df = df.append(df2, ignore_index=True)
+
+
+                        - Removing rows
+
+                                    df.drop(index=4, inplace=True) # drop index 4
+
+                                    df.drop(index=df[df['last] == 'Doe'].index)
+
+
+
+
