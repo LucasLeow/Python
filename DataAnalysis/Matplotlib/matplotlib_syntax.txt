@@ -12,25 +12,50 @@ import matplotlib.pyplot as plt
 
 == Matplotlib by itself (without pandas) ==
 
-            plt.plot(x_data, y_data, color='#444444', linestyle='--', marker='.', label='first_plot') # default is lineplot
-            plt.plot(x_data_2, y_data_2, color='#adad3b', marker='o', label='second_plot') # 2nd set of data
-                formatting:
-                    - color
-                    - linestyle
-                    - marker
-                    - linewidth (default is 1)
+    (Default Line Chart)
 
-            plt.xlabel('Ages')
-            plt.ylabel('Salary')
-            plt.title('Median Salary (USD) by Age')
+                plt.plot(x_data, y_data, color='#444444', linestyle='--', marker='.', label='first_plot') # default is lineplot
+                plt.plot(x_data_2, y_data_2, color='#adad3b', marker='o', label='second_plot') # 2nd set of data
+                    formatting:
+                        - color
+                        - linestyle
+                        - marker
+                        - linewidth (default is 1)
 
-            plt.legend() # using label keyword in plot to automatically apply legend
+                plt.xlabel('Ages')
+                plt.ylabel('Salary')
+                plt.title('Median Salary (USD) by Age')
 
-            plt.grid(True) # include grid
+                plt.legend() # using label keyword in plot to automatically apply legend
 
-            plt.tight_layout() # gives better padding
+                plt.grid(True) # include grid
 
-            plt.savefig('plot.png') # saves plot as plot.png on current dir
-                - can also pass absolute path
+                plt.tight_layout() # gives better padding
 
-            plt.show()
+                plt.savefig('plot.png') # saves plot as plot.png on current dir
+                    - can also pass absolute path
+
+                plt.show()
+
+
+
+
+== 2 Bar Charts & plotting data from pandas ==
+
+        import numpy as np 
+        import pandas as pd
+        from collections import Counter
+
+        df = pd.read_csv("data.csv")
+        ids = df['Responde_id']
+        languages = df['LanguagesWorkedWith']
+
+        x_indexes = np.arange(len(x_val)) # create index of values in numpy format
+            - so that can offset bar on x-axis
+        width = 0.25 #default bar width is 0.8. More bar means must make thinner
+
+        plt.bar(x_indexes - width, y_val, width=width, color="#444444", label="All Devs")
+        plt.bar(x_indexes, y_val2, width=width,color="#444444", label="All Devs")
+        plt.bar(x_indexes + width, y_val3,width=width, color="#444444", label="All Devs")
+
+        plt.xticks(ticks=x_indexes, labels=x_val) # convert xlabels from index back to original x_values
