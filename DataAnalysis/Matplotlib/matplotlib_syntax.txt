@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+-- Styling plt --
+    plt.style.available # shows all available style (not a method)
+    plt.style.use('fivethirtyeight')
+
+-- xkcd comics --
+    plt.xkcd() # another style that gives comic-like style
+
+== Matplotlib by itself (without pandas) ==
+
+            plt.plot(x_data, y_data, color='#444444', linestyle='--', marker='.', label='first_plot') # default is lineplot
+            plt.plot(x_data_2, y_data_2, color='#adad3b', marker='o', label='second_plot') # 2nd set of data
+                formatting:
+                    - color
+                    - linestyle
+                    - marker
+                    - linewidth (default is 1)
+
+            plt.xlabel('Ages')
+            plt.ylabel('Salary')
+            plt.title('Median Salary (USD) by Age')
+
+            plt.legend() # using label keyword in plot to automatically apply legend
+
+            plt.grid(True) # include grid
+
+            plt.tight_layout() # gives better padding
+
+            plt.savefig('plot.png') # saves plot as plot.png on current dir
+                - can also pass absolute path
+
+            plt.show()
