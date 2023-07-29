@@ -1,0 +1,53 @@
+== 1 Intro to DataStruct ==
+    
+    What are Data Structures?
+
+        - Building blocks to create software applications
+        - Software Applications = Algorithms (Instructions) + Data Structures
+
+        - Need to use correct Data Structure for given problem
+        - Each Data Structure have pros & cons
+
+        - Different language have different implementation of data structures
+        - data structures is conceptual
+
+
+        Arrays:
+            Python - List
+            Java - Native Array | ArrayList
+            c++ - Native array | std::vector
+
+        Hashmap:
+            Python - dictionary
+            Java - HashMap | LinkedHashMap
+            c++ - std::map
+        
+        LinkedList:
+            Python - Not avail
+            Java - LinkedList
+            c++ - std::list
+
+
+
+
+== 2 Big O notation ==
+
+    - measure of:
+        - running time
+        - space requirements
+    
+        as input size grows
+    
+
+    - Measure of time (using stopwatch) is not feasible
+        - different computers have different processing power
+    - Mathematical representation of running time more feasible (big O)
+
+    Actually have 3 notation:
+        - best case scenario : Big Omega notation
+            - fastest time, smallest memory
+
+        - worst case scenario : Big O notation
+            - slowest time, largest memory
+
+        - average of best & worst : Big Theta notation

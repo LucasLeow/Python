@@ -1,0 +1,218 @@
+== MisraTurp Tree Census EDA ==
+
+1) Understand Columns & what they mean  
+    - datasets should come with explanation file
+    - if not provided, guess meaning from dataset
+
+
+2) Initial analysis
+
+
+    df.head() # See general cols / data
+    df.shape # see no. row & cols
+
+
+3) Filter out unnecessary columns
+    - get subset dataframes to focus on smaller area
+
+    * Think of domain-specific problem to solve
+        - come up with a list of possible insights to gather
+        - retrieve / create cols required to achieve said problem
+            create like: price * Quantity = Total Sales etc.
+            or Split date into month, day, year etc.
+
+
+
+        df.columns # see all columns & copy only necessary cols
+
+        sub_df = df[[desired_cols]]
+
+
+4) Further checks
+
+    4.1) sub_df.dtypes # Check data types of each col
+
+    4.2) sub_df.shape # check sub_df size
+
+    4.3) sub_df.isna().sum() # check null values
+
+        sub_df[sub_df['col'].isna()] # check null values for each cols
+
+    4.4) sub_df.describe() # Statistical overview
+
+    4.5) df.hist(bins=60, figsize=(20,10)) # check for outliers / spread
+        - cut off data as required
+
+    4.6) Categorical checks
+        df['tree_type'].value_counts()
+
+        pd.DataFrame(df['tree_type'].value_counts()).plot(kind='bar', figsize=(20,10))
+
+
+    4.7) For category cols with same categories:
+
+        cat_df = sub_df[['col1', 'col2']]
+        cat_df.apply(pd.Series.value_counts)
+
+
+
+5) Analyzing cols with null data
+    
+    5.1) sub_df.isna().sum() # to find out all cols with null values & how many
+
+    5.2) sub_df['col1'].unique() # See what are some values available
+        # if numerical value: sub_df['col1'].describe() # check the avg / median values & spread
+
+    5.3) sub_df[sub_df['col1'].isna()] # check all rows where null values exist
+        # see if other columns are filled
+            - If all other columns are null, can drop these rows
+            - if other columns contains other info, use those info to try to obtain value for missing data
+            
+
+    # bins are bars in histogram. 60bins = 60 bars (for larger dataset)
+    df.hist(bins=60, figsize=(20,10))
+
+    df[['tree_id', 'stump_diam']].plot(kind="scatter", x='tree_id', y='stump_diam', figsize=(20,10));
+
+
+
+
+
+
+== Rob Mulla RollerCoaster EDA ==
+(https://www.youtube.com/watch?v=xi0vhXFPegw)
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sb
+
+plt.style.use('ggplot')
+pd.set_option('max_columns', 200)
+
+
+1) Basic analysis
+
+    df.shape # see general size of data
+
+    df.head(10) # see types of columns, what kind of data is within dataset (general sensing)
+
+    df.columns # see all columns, to sieve out df subsets later on (cut down data size for focused analysis)
+
+    df.dtypes # see types of data (object vs numeric)
+
+    df.describe() # see numerical statistic summary of dataset
+
+
+2) Data Cleaning (Before Problem Solving)
+
+    2.1) Remove any unnecessary columns to prevent wasting time cleaning unwanted columns 
+        - discretion required (unnecessary subjective)
+
+        subset_df = df[['col1', 'col2', 'col3']]
+
+        or
+
+        df.drop(['col1'], axis=1)
+
+    2.2) Convert all cols to appropriate dtype
+
+        df['opening_date'] = pd.to_datetime(df['opening_date'])
+        df['speed'] = pd.to_numeric(df['speed'])
+
+    
+    2.3) Rename cols to more appropriate / standardized name (optional)
+
+        subset_df = subset_df.rename(columns={
+            'old_col':'new_col',
+            'old_col2': 'new_col2'
+        })
+
+    2.4) Identify missing values
+
+        subset_df.isna().sum()
+
+        subset_df.duplicated() # check for any duplicated rows in df
+        subset_df.loc[subset_df.duplicated()]
+
+        subset_df.loc[subset_df.duplicated(subset=['col1'])]
+        subset_df.query('col1 == "duplicate_name"')
+
+
+
+        -- Removing duplicates --
+
+            new_df = df.loc[~df.duplicated(subset=['col1', 'col2', 'col3'])].reset_index(drop=True)
+
+
+3) Feature Understanding (after data cleaning) (individual feature analysis)
+
+    Numerical cols: (univariate analysis)
+
+        ax = df['Speed'].plot(kind='hist', bins=20, title='Coaster Speed') # shows distribution
+            - bins = no. of cols
+            - look for general distribution + outliers
+
+        ax.set_xlabel("speed (mph)")
+
+
+
+        ax = df['Speed'].plot(kind='kde', bins=20, title='Coaster Speed') # Kernel density plot
+
+        
+
+
+    Categorical cols:
+
+        df['Year_Introduced'].value_counts()
+
+        ax = df['Year_Introduced'].value_counts().head(5).plot(kind='bar', title='Top Years Coasters Introduced')
+        df['Year_Introduced'].value_counts().head(5).plot(kind='barh') # horizontal bar
+
+        ax.set_xlabel('Year Introduced')
+        ax.set_ylabel('Count')
+
+
+
+4) Feature Relationships (r/s between features)
+    - scatterplot
+    - heatmap corr
+    - pairplot
+    - groupby
+
+    df.plot(kind='scatter', x='speed', y='height', title='Coaster speed vs height')
+    plt.show() # cleaner way to show plot
+
+    sb.scatterplot(x='speed', y='height', data=df, hue='year_introduced')
+
+    sb.pairplot(df, vars=['col1', 'col2', 'col3', 'col4'], hue='type')
+    plt.show()
+
+
+    df_corr = df[['col1', 'col2', 'col3']].dropna().corr() # show correlation b/w r/s
+
+    sb.heatmap(df_corr, annot=True)
+
+
+
+5) Come up with analytics questions to solve
+    - What are the locations with most sales
+    - which roller coasters are the fastest
+    - in which region does the biggest trees exist
+    - what causes the tree to be so big?
+    - Which month of the year has the most sales 
+    - Which brand of car go the fastest
+        - what kind of engine is it using
+    etc.
+
+
+
+
+    np.random.seed(1234)
+
+df = pd.DataFrame(np.random.randn(10, 4),
+
+                  columns=['Col1', 'Col2', 'Col3', 'Col4'])
+
+boxplot = df.boxplot(column=['Col1', 'Col2', 'Col3'])  

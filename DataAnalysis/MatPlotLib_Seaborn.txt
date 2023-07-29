@@ -10,9 +10,12 @@ import matplotlib.pyplot as plt
 -- xkcd comics --
     plt.xkcd() # another style that gives comic-like style
 
-== Matplotlib by itself (without pandas) ==
 
-    (Default Line Chart)
+
+
+
+
+== Default Line Plot ==
 
                 plt.plot(x_data, y_data, color='#444444', linestyle='--', marker='.', label='first_plot') # default is lineplot
                 plt.plot(x_data_2, y_data_2, color='#adad3b', marker='o', label='second_plot') # 2nd set of data
@@ -38,6 +41,22 @@ import matplotlib.pyplot as plt
                 plt.show()
 
 
+                df.rolling(250).mean().plot() # rolling allows chart to move
+
+
+
+
+
+                plt.figure(figsize=(8,5))
+
+                plt.plot(gas.Year, gas.USA, 'r-', label="USA")
+                plt.plot(gas.Year, gas.Canada, 'b-', label="Canada")
+
+                plt.show()
+
+
+
+
 
 
 == 2 Bar Charts & plotting data from pandas ==
@@ -59,3 +78,60 @@ import matplotlib.pyplot as plt
         plt.bar(x_indexes + width, y_val3,width=width, color="#444444", label="All Devs")
 
         plt.xticks(ticks=x_indexes, labels=x_val) # convert xlabels from index back to original x_values
+
+
+
+
+
+
+        df['Year_Introduced'].value_counts()
+
+        ax = df['Year_Introduced'].value_counts().head(5).plot(kind='bar', title='Top Years Coasters Introduced')
+        df['Year_Introduced'].value_counts().head(5).plot(kind='barh') # horizontal bar
+
+        ax.set_xlabel('Year Introduced')
+        ax.set_ylabel('Count')
+
+
+
+
+
+
+    -- Sales Analysis --
+
+    plt.bar(x = sorted(y2k19.Month.unique()), height = mth_grp_2k19['Sales'].sum())
+    plt.xticks(sorted(y2k19.Month.unique()));
+    plt.ylabel("Sales in USD")
+    plt.xlabel("Months")
+
+
+
+    city_grp = combined_df.groupby(['City'])
+    city_grp.sum()['Sales'].sort_values().plot(kind='bar')
+
+
+
+
+== Histogram ==
+
+    df.hist(bins=60, figsize=(20,10)) # check for outliers / spread
+        - cut off data as required
+
+
+
+    ax = df['Speed'].plot(kind='hist', bins=20, title='Coaster Speed') # shows distribution
+    - bins = no. of cols
+    - look for general distribution + outliers
+
+    ax.set_xlabel("speed (mph)")
+
+
+
+    ax = df['Speed'].plot(kind='kde', bins=20, title='Coaster Speed') # Kernel density plot
+
+
+
+== Scatterplot ==
+
+    df.plot(kind='scatter', x='speed', y='height', title='Coaster speed vs height')
+    plt.show() # cleaner way to show plot

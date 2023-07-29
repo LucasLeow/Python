@@ -35,6 +35,23 @@ df['YearsCode'].nunique() # return count of unique categories
 
 
 
+-- Read Multiple CSVs from directory --
+
+
+                import os
+
+                files = [file for file in os.listdir("../datasets/Sales_Data")]
+                data_path = "../datasets/Sales_Data/"
+                combined_df = pd.DataFrame()
+                for file in files:
+                    sale_df = pd.read_csv(data_path + file)
+                    combined_df = pd.concat([combined_df, sale_df])
+                    print(combined_df.shape)
+
+
+
+
+
 
 
 -- Creating DataFrames -- (2D Data structure)
@@ -322,12 +339,18 @@ df['Hobbyist'].value_counts() # provide count for categorical data
                                     df[['first', 'last']] = df['full_name'].str.split(' ', expand=True)
 
 
+                    - Split columns based on delimiter
+                    
+                        combined_df[['Street', 'City', 'Postal']] = combined_df['Purchase Address'].str.split(',', expand=True)
+
+
 
             Manipulating Rows
 
                         - Adding Rows to DF
 
                                     df.append({'first': 'Tony'}, ignore_index=True)
+                                    df.append({'Country':'Singapore', 'Wins': 0, 'Team':'Team4', 'YearFirstWin':'N/A'}, ignore_index=True)
 
 
                         - Adding 2 dataframe together
@@ -340,6 +363,10 @@ df['Hobbyist'].value_counts() # provide count for categorical data
                                     df.drop(index=4, inplace=True) # drop index 4
 
                                     df.drop(index=df[df['last] == 'Doe'].index)
+
+
+                                    # to not include rows with certain condition
+                                    combined_df = combined_df[combined_df['Order Date'] != "Order Date"]
 
 
 
@@ -465,5 +492,75 @@ df['Hobbyist'].value_counts() # provide count for categorical data
                             country_grp['Salary'].agg(['median', 'mean']).loc['Canada']
 
 
+                            df.query('Location != "Other"')
+                            .groupby('Location')['Speed']
+                            .agg(['mean', 'count'])
+                            .query('count >= 10')
+                            .sort_values('mean') || .sort_values('count')
+                            .plot(kind='barh', figsize=(12,5), title='Avg Coaster Speed by Location')
 
 
+
+
+
+== DateTime Manipulation ==
+
+        # Converting dtype
+        combined_df['Order Date'] = combined_df['Order Date'].astype('datetime64[ns]')
+
+
+
+        # Creating Month & Year cols
+        combined_df['Month'] = combined_df['Order Date'].dt.month
+        combined_df['Year'] = combined_df['Order Date'].dt.year
+
+
+
+
+== Converting Datatypes ==
+
+
+        combined_df['Price Each'] = combined_df['Price Each'].astype(float)
+        combined_df['Quantity Ordered'] = combined_df['Quantity Ordered'].astype(int) 
+
+        df['Quantity'] = pd.to_numeric(df['Quantity']) # automatically detect int or float
+
+
+        df['Date'] = pd.to_datetime(df['Date'])
+
+
+
+== Combining DataFrames ==
+
+    1) Horizontally (adding to columns)
+
+        - merge (commonly used)
+            - default is inner join
+
+                new_df = pd.merge(df1, df2, on='id_col') # result will be rows common between df1 & df2 for 'id_col'    
+        
+                    
+                new_df = pd.merge(df1, df2, on=['ID', 'col4'])
+
+                new_df = pd.merge(df1, df2, suffixes=['_l', '_r'], left_on='Col_2', right_on='Col_A')
+                    - will only merge data where both left & right have values matching
+
+                new_df = pd.merge(df1, df2, left_index=True, right_index=True)
+                    - merge on indexes of both tables
+
+                pd.merge(df1, df2, on="col_name", how="outer") # how="left" , how="right"
+
+        - join
+
+    2) Vertically (adding to rows)
+
+        - concat (commonly used)
+
+                pd.concat([df1, df2])
+
+                pd.concat([df1, df2], ignore_index=True) # to reset index (no repeated index values)
+
+                pd.concat([df1, df2], axis=1, join='inner') # concat df side by side
+                    - axis=0 is default
+
+        - append (deprecate soon)
