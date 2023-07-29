@@ -51,3 +51,36 @@
             - slowest time, largest memory
 
         - average of best & worst : Big Theta notation
+
+
+
+        Big O Notation:
+
+            - O(1) : constant time 
+                - time remains fairly constant as input size increase
+                - hashmap search with index is constant time
+
+            - O(log n) : logarithmic time
+                - finding element in sorted array (binary search, lefthalf righthalf)
+            
+            -  O(n) : linear time
+                - time increases linearly as input increases
+                - looping through array for searching / performing operation
+
+            - O(n log n): linearithmic time
+                - sorting elements with merge sort
+
+            - O(n^2) : quadratic time
+            - running nested 2 loops
+
+            - O(n^3) : cubic time
+                - running nested 3 loops
+            
+            - O(2^n) : exponential time
+                - find all subsets
+            
+            - O(n!) : factorial time
+                - find all permutation of given set
+
+
+
