@@ -1,0 +1,24 @@
+Classes:
+    - blueprint for objects
+
+Abstract Classes:
+    - blueprint for other classes
+    - a class with 1 or more abstract method is an abstract class
+    - abstract method = function declaration without implementation
+
+    - By default, python does not have abstract classes
+    - need to use "abc" module
+
+    from abc import ABC, abstractmethod
+
+    class Polygon(ABC):
+        @abstractmethod
+        def commonMethod(self):
+            pass
+    
+    class Triangle(Polygon):
+        def commonMethod(self):
+            print("Implementation in Triangle")
+
+    t = Triangle()
+    t.commonMethod()

@@ -1,0 +1,40 @@
+class Person:
+    count = 0
+    def __init__(self, name, age, gender):
+        self.__name = name
+        self.__age = age
+        self.__gender = gender
+        Person.numPerson()
+        
+    
+    @property # to specify a getter with a property name (Function name will be property name)
+    def Name(self):
+        return self.__name
+
+    @Name.setter
+    def Name(self, newName):
+        self.__name = newName
+    
+    # Private variables prefixed with __
+    - privacy not enforced
+    - attribute accessible via: _Person__name, _Person__age etc.
+
+    @staticmethod
+    def numPerson():
+        Person.count += 1
+
+
+p1 = Person("Lucas", 25, "M")
+print(p1.Name)
+p1.Name = "Tom"
+print(p1.Name)
+print(Person.count)
+
+
+== Benefits of Getters | Setters ==
+    - can specify pre-conditions to set value
+    eg:
+    Setter for Age:
+        - cannot be negative
+        - must be between certain ranges
+        - cannot be over 120 etc.

@@ -1,0 +1,7 @@
+Sections
+    - Docker for development
+    - Creating new project
+    - Using Django with Docker
+    - Setting up new Django project
+    - Linting & Testing
+    - Using Docker compose

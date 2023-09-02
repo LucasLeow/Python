@@ -1,0 +1,33 @@
+Keywords
+    - Proxy Design Pattern
+
+== Proxy Design Pattern ==
+    - does not directly allow main program to manipulate class objects
+    - utilize proxy class to manipulate object
+
+    - When want to manipulate certain object, manipulate via proxy class
+
+
+
+    Code:
+    from abc import ABCMeta, abstractstaticmethod
+
+    class IPerson(metaclass = ABCMeta):
+        @abstractstaticmethod
+        def person_method():
+            ''' Interface Method '''
+    
+    class Person(IPerson):
+        def person_method(self):
+            print("I am a Person")
+
+    class ProxyPerson(IPerson):
+        def __init__(self):
+            self.person = Person()
+
+        def person_method(self):
+            print("I am the proxy functionality") # can include extra logic here
+            self.person.person_method() # perform the actual method
+    
+    p1 = ProxyPerson()
+    p1.person_method()

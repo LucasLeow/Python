@@ -1,0 +1,41 @@
+App: Recipe API
+    DB <-> Backend REST Api (Django) 
+        -> Mobile App utilizing endpoint
+        -> Web App utilizing endpoint
+
+Features:
+    - 19 API endpoints
+        - manage users | recipes | tags | ingredients
+    - User Authentication
+    - Browseable Admin Interface (Django Admin)
+    - Browsable API (Swagger UI)
+
+
+== Technologies ==
+    - Python (Django) 
+        - API Mapping
+        - ORM (create & manage object in db)
+        - Django admin
+
+    - Django REST 
+    - PostgresSQL
+    - Docker
+        - db container
+        - backend container
+    - Swagger UI (API documentation)
+    - Github actions (automation)
+        - testing & linting 
+
+
+== Django Project Structure ==
+    - Split into various apps
+
+    app/ - main app
+    app/core/ - core app
+        - code shared between multiple apps
+        - database definition using Django models
+    app/user/ - app for user API
+        - User registration & User auth tokens
+    app/recipe/ - recipe related code
+        - API for recipes
+        - logic for manipulating recipe (adding / deleting etc.)

@@ -1,0 +1,68 @@
+Keywords
+    - What are python modules
+    - if __name__ == "__main__"
+
+== What are python modules ==
+    - modules are nothing but python file to perform some function
+    - used to break up large program into smaller, reusable files
+
+    - How to make directory a python module -
+        1) create a __init__.py file inside directory
+        * Some IDEs automatically create init.py file 
+
+
+eg:
+
+main.py:
+
+    from <module_name> import <function_name>
+    from functionality import add # import "add" fn from functionality.py
+    from functionality import * # import everything from functionality.py
+
+    -- Importing from dir with single py file --
+        from <dirName> import <pythonFile>
+        from otherDir import second
+        from otherDir.second import * # From otherDir, second.py import everything inside
+
+        second.secondFunction()
+
+    -- Importing from dir with multiple py files --
+        1) create __init__.py inside desired dir (makes the dir into a python module)
+        2) go inside __init__.py
+            __all__ = ["second", "third"] (python file names inside dir)
+
+        3) go to main.py:
+            from otherDir import *
+
+            second.secondFunction()
+            third.thirdFunction()
+
+
+functionality.py:
+
+    def add(x, y):
+        return x + y
+
+    def sub(x, y):
+        return x - y
+        
+otherDir:
+    second.py:
+        def secondFunction():
+            print("function inside 2nd.py inside otherDir")
+
+    third.py:
+        def thirdFunction():
+            print("function inside 3rd.py inside otherDir")
+
+
+== if __name__ == "__main__" ==
+    - if file executed directly, __name__ will be __main__
+    - if file imported then executed, __name__ will be <module_name>
+
+    * good to include:
+        if __name__ == '__main__':
+            main()
+
+        - otherwise, everytime there is an import, file will be executed
+    

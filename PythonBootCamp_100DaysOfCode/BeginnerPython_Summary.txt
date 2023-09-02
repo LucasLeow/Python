@@ -1,0 +1,180 @@
+https://www.askpython.com/ 
+    - website to check for anything python related
+Keywords
+    - Python input
+    - Variable Naming Convention
+    - Primitive DataTypes
+    - Type checking + Type casting
+    - f-strings
+    - conditionals (if / elif / else)
+    - logical operators
+    - Python Random Module
+    - Python Lists
+    - Python for loops
+    - Python functions 
+    - Python while loop
+    - Python Dictionaries
+
+== Python input ==
+    name = input("What is your name?")
+    age = int(input("What is your age?"))
+
+
+== Variable Naming Convention ==
+    - use meaningful names
+
+
+== Primitive DataTypes ==
+    - String : "hello" <- string literal
+        print("Hello"[0]) <- prints 'H'
+        print("Hello"[-1]) <- prints 'o'
+            - subscripting
+    - Integer
+        - can use underscores for better visualization of large numbers
+        print(123_456_789) -> same as print(123456789)
+        print(6_000_000) <- easily seen as 6mil
+    
+    - Double / Float
+        - decimal numbers
+        eg: 123.456
+    
+    - Boolean
+        - True / False
+        - caps for python
+        
+
+== Type checking + Type casting ==
+    name = "lucas"
+    - print(type(name)) # prints the type of dtype
+
+
+    - typecasting -
+        str(num) # converts number to string
+        int(str_1) # converts string to int
+        float(str_1) # converts str to float
+
+
+== Arithmetic PEMDAS ==
+    - () : Parenthesis
+    - ** : Exponents
+    - * & / Multiplication & Division (equal importance)
+    - + & - Addition & Subtraction (equal importance)
+
+    // : floor division : returns whole number, chopping off remainders
+
+
+== f-strings ==
+        - template strings, can add variables within string
+    score = 12
+    print(f"Your score is {score}")
+
+
+== conditionals (if / elif / else) ==
+    - by indentations
+
+    if (height > 120):
+        print("You can ride the rollercoaster")
+    else:
+        print("You cannot ride this rollercoaster)
+
+    - Nested if-else -
+        if (height > 120):
+            if (age > 18):
+                print("12 dollar tickets")
+            else:
+                print("7 dollar tickets")
+        else:
+            print("Cannot purchase ticket")
+
+    - elif -
+    
+    if age (> 20):
+        print("ok")
+    elif age ( < 12):
+        print("no")
+    else: 
+        print("between 12 & 20")
+
+== logical operators ==
+    - to combine multiple conditional checks
+    - and | or | not
+
+    if (a > 10 and a < 13):
+        print("a is between 10 & 13")
+
+== Python Random Module ==
+    - randomization (commonly used in games)
+    - may also be required in other apps
+
+    - computers are deterministic
+        - pseudorandom at best (tries to mimic random but if run long enough, there is a pattern)
+    - Python utilizes Mersenne twister pseudorandom generator
+
+    import random
+
+    random.randint(100, 200)
+        - generates random whole number between 100 & 200
+
+    random.random() -> randomly generates between 0 & 1.0 (decimal) (0.99999, excluding 1)
+        - multiply by desired number to get range from 0 to desired number
+
+
+
+== Python Lists ==
+    - a kind of data structure in python
+    - similar to arrays in other languages
+    - data structure = a way to store data
+    - python list can be mixed data types
+
+    fruits = ["myItem", 1, 2, "hello"]
+    - can search for list methods if required
+
+
+
+== Python for loops ==
+    for item in mylist:
+        print(item)
+
+    for num in range(start,stop,step)
+
+    for num in range(0, 100):
+        print(num)
+
+== Python while loop ==
+    * Have danger of becoming infinite loop
+
+    while (something true):
+        do something
+        if (something achieved):
+            break;
+
+    value = 0
+    while (value < 5):
+        do somthing
+        value += 1
+
+
+== Python functions ==
+
+    def myFunction():
+        print("Hello")
+
+    myFunction() # calling function
+
+    - functions with input -
+        Parameter: being received by function
+        Argument: passed into function
+
+        def myFunction(name):
+            print("Hello" + name)
+
+        inside myFunction, parameter = name
+
+        when calling myFunction("lucas"), "lucas" is the argument
+
+        myFunction(location="singapore", name="lucas")
+            - specifying parameter to be more specific
+            - argument must match parameter name
+
+
+== Python Dictionaries ==

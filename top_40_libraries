@@ -1,0 +1,193 @@
+NLP Related:
+    1) Natural Language Toolkit (NLTK)
+        - linguistic + com science
+        - tokenizing | tagging | stemming
+
+    2) gensim
+        - another NLP library
+
+    3) flashtext
+        - searching / replacing words
+        - extract, remove, replace keywords
+        - super fast for large data compared to Regex
+        - unable to search special chars
+
+
+Computer Vision Related:
+    4) openCV
+        - largest computer vision library
+        - reading / writing images
+        - detecting edges, filtering images
+        - detect face, identify person
+
+    5) simpleCV
+        - beginner computer vision library
+        - openCV for beginners
+        - only works with python 2.7
+        
+GUI Related:
+    6) tkinter
+        - fast, easy way to create GUI app
+        - for simple, fast projects
+        
+    7) wxPython
+        - Alternative to tkinter
+        - cross platform (windows, mac, linux support)
+        
+    8) PyQt
+        - most flexible
+        - best for complex projects
+        
+Game Development:
+    9) pygame
+        - graphics + sound libraries to create fast simple projects
+        
+    10) pyglet
+        - for 3D games
+        - no external dependencies
+    
+    11) PyEngine3D
+        - to create stunning 3D scenees
+        
+Web Development:
+    12) Requests
+        - most popular HTTP library
+        - used to send HTTP requests
+        
+    13) Scrapy
+        - webscrapping library
+        - for data mining | automated testing
+        - scrap for job postings
+        
+    14) Beautiful Soup
+        - Also for webscrapping / parsing HTML, XML
+        - easy to use, good for beginners
+        - scrap data to make prediction
+        
+    15) Zappa
+        - Build & deploy serverless event-driven python app
+        - on aws lambda & api gateway
+        - serverless hosting for python apps
+        - infinite hosting, 0 downtime, 0 maintenance
+        - pay based on requests served
+        
+    16) Django
+        - free OS web framework
+        - easily make database access web
+        - user auth | content admin | sitemaps | rssfeeds 
+        - for heavy, complex websites
+        
+    17) Flask
+        - similar to Django but newer
+        - lightweight web server gateway interface
+        - more flexible than Django
+        - for simple, smaller websites
+        
+Mathematics Related:
+    18) NumPy
+        - best suited for matrices / arrays
+        - fast & efficient, even for large data
+        
+    19) SciPy
+        - goes together with NumPy
+        - used for ML & Image manipulation
+        
+    20) SymPy
+        - another library for mathematics
+        
+Data Science & Visualization:
+    21) pandas
+        - explore, represent, manipulate data
+        - read, write data in different formats
+     
+    22) SQLAlchemy
+        - python sql toolkit
+        - ORM
+    
+    23) Matplotlib
+        - data visualization library
+        
+    24) Plotly
+        - also data visualization
+        - creates more complex plots
+        - harder to use
+    
+    25) scikit-learn
+        - opensource, commercially usable library
+        - for working with complex data
+        - classification | regression | clustering 
+        - dimensionality reduction | model selection | preprocessing
+        
+    26) imbalanced-learn
+        - for handling imbalanced datasets
+        - offers resampling techniques
+        - compatible with scikit learn
+        
+    27) theano
+        - find, optimize, evaluate mathematical expressions
+        - tight integration with Numpy
+        
+    28) Bokeh
+        - data viz tool similar to matplotlib
+        - uses html & JS to provide graphics
+        - good for webbased dashboards 
+        
+    29) pymc3
+        - for bayesian statistical modelling
+        - probabilistic ML
+        - uses theano library
+        
+    30) LightGBM
+        - framework for Gradient boosting
+        - uses tree based ML algorithm
+        
+    31) eli5 (explain like im 5)
+        - debug ML classifiers
+        - explain predictions
+        - good for checking work
+        
+Deep Learning Libraries:
+    32) Keras
+        - opensource deep learning NN library
+        - capable of running on top of tensorflow | cntk | theano
+        - can build deep models for JVM & smartphones
+        
+    33) TensorFlow
+        - build & deploy ML models
+        - train, deploy anywhere
+        
+    34) PyTorch
+        - tensor computation with strong GPU acceleration
+        - Deep neural network build on tape-based auto-grad symptom
+        
+Others:
+    35) Twisted
+        - event-based framework for internet app
+        
+    36) Ipython (Interactive Python)
+        - cmd line shell for interactive computing
+        - kernel for jupyter
+        
+    37) pillow
+        - imaging library
+        - open | manipulate | saving images
+        - support many formats
+        
+    38) Poetry
+        - manage python packages / dependencies
+        - resolve dependencies conflict
+        
+    39) pywin32
+        - for interacting with Windows
+        - control msoft apps via python
+        
+    40) kivy
+        - building android apps
+        - cross platform, linux windows OSX android iOS raspberry pi
+        
+    41) Pendulum
+        - date time manipulation
+        - timezone manipulation
+        
+    42) Loguru
+        - ease for logging

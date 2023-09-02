@@ -1,0 +1,38 @@
+keywords:
+    - Type Hinting + checking
+    - Function Annotations
+
+== Type Hinting + checking ==
+- Python is dynamic-typed language
+    - only know var type on runtime
+
+
+# Suggest to python that myParam should be int
+def myFunction(myParam: int): <- Type Hinting
+    pass
+
+
+# Type Hinting List of integers
+def dosth(param: list[int]):
+    pass
+
+- nothing stopping string to be parsed
+- Have to use mypy module to check for any inconsistency
+
+- pip install mypy
+cmd: mypy <path_to_file>
+
+
+
+== Function Annotations ==
+    * docstrings are still the recommended approach
+
+def velocity(s: 'in miles', t: 'in hours') -> 'mph':
+    return s/t
+
+-> 'mph' is merely an annotation to indicate to other developers
+    - what the return type should be
+    - it has no impact on the processed code
+
+- Nothing prevents user from entering other values
+- print(velocity.__annotations__)

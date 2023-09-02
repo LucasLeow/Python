@@ -1,0 +1,29 @@
+API Features:
+    - User Authentication
+    - Creating objects
+    - Filtering & Sorting objects
+    - Uploading & Viewing images
+
+
+Course Structure:
+    1) App Design
+        - API Planning
+        - Technologies required
+    2) TestDriven Development
+    3) System setup
+    4) Project setup
+        - docker file
+        - docker compose config
+        - start new django
+    5) configure github actions
+        - run listings
+        - perform tests
+    6) TDD in Django
+    7) Configure database
+    8) Create User model (database)
+    9) Setup Django Admin (manage data in db thru browser)
+    10) API Documentation
+    11) Build User | Recipe | Tags | Ingredients API | Recipe Image API
+        - implement filtering
+    12) Deploy to AWS
+        - using docker & docker compose

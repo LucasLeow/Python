@@ -1,0 +1,35 @@
+== Generators ==
+    - Lazy execution
+        - execute only when needed
+        - saves memory
+
+    - does not immediately execute function
+        - memory remains the same regardless of input provided
+        - memory consumed only when generator triggered
+
+def mygenerator(x):
+    for i in range(1, x):
+        yield i ** 3
+
+values = mygenerator(100)
+
+# next() provides the next value in generator
+print(next(values))
+
+for x in values:
+    print(x)
+
+
+== Creating infinite sequence with generators ==
+    - doesn't store any values, just standby
+
+def infinite_sequence():
+    result = 1
+    while True:
+        yield result
+        result *= 5
+
+values = infinite_sequence()
+print(next(values))
+print(next(values))
+print(next(values))

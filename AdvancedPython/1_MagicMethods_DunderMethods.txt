@@ -1,0 +1,62 @@
+Keywords:
+    - Dunder
+    - Dunder for operator overloading
+    - single _ vs double __ in python classes
+
+
+== Dunder ==
+    represented with "__"
+    - modifies the way a function is being called
+    - can look at different dunder methods to see what can be done
+    for eg: __init__ (constructor)
+        - p = Person("Lucas", "Leow") 
+            - Dont have to specify p = Person.__init__() <- wrong
+
+    eg:
+
+    class Person:
+        def __init__(self, name, age): <- dunder method
+            self.name = name
+            self.age = age
+        
+        def __del__(self):
+            print("Object is being deleted")
+
+
+        p = Person("Lucas", 26)
+        del p
+
+
+== Dunder for operator overloading ==
+    class Vector:
+        def __init__(self, x, y):
+            self.x = x
+            self.y = y
+        
+        def __add__(self, other):
+            return Vector(self.x + other.x, self.y + other.y)
+
+    v1 = Vector(10, 20)
+    v2 = Vector(50, 60)
+    v3 = v1 + v2
+    print(v3.x, v3.y)
+
+== single _ vs double __ in python classes ==
+
+    - single _ is used to specify private attribute in Python   
+    - privacy is not enforced in any way, just by convention
+    - any attributes / functions with leading '_' should not be imported from anywhere else
+
+    - double __ is used to make attribute even harder to access
+    - any attributes specified as __<attribute_name> will be renamed to:
+        _<class_name>__<attribute_name> (applies to method as well)
+
+    eg:
+    class Myclass:
+        def __init__(self):
+            self._semiprivate = "still accessible"
+            self.__superprivate = "harder to access"
+
+    mc = Myclass()
+    print(mc._semiprivate)
+    print(mc._Myclass__superprivate)

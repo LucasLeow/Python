@@ -1,0 +1,88 @@
+Keywords:
+    - Typical Usage
+    - *args & **kwargs
+    - sys module for command line arguments
+    - including flags in command line (-p -o etc.) (optional arguments)
+
+
+
+== Typical Usage ==
+    - Systems programmer (python scripts)
+    - Using command line to execute python scripts
+
+
+eg command:
+    python3 myscript.py result.txt
+    python3 myscript.py -o text.txt -l DEBUG -c
+        -o : output file is text.txt
+        -l : logging level is DEBUG
+        -c : case sensitive
+        (all specified in python program)
+
+
+
+== *args & **kwargs ==
+
+    def myFunction(*args, **kwargs):
+        for arg in args:
+            print(arg)
+        
+        for key, value in kwargs.items():
+            print(key, value)
+
+    myFunction(1,2,3,4,5,name="Lucas", age=25)
+
+
+
+
+== sys module for command line arguments ==
+    - mimicks argc & argv in c & c++ programs
+        - argc : how many arguments passed in command line
+        - argv: argument vector
+            - argv[0] : always file name (main.py )
+                argv[1], argv[2] ... will be positional arguments
+    
+    - Python Implementation -
+
+import sys
+
+print(sys.argv[0])
+print(sys.argv)
+
+cmd: python test.py "hello world"
+
+
+filename = sys.argv[1]
+message = sys.argv[2]
+
+with open(filename, 'w+') as f:
+    f.write(message)
+    f.close()
+ 
+
+
+
+== including flags in command line (-p -o etc.) (optional arguments) ==
+
+    import sys
+    import getopt # need this for optional arguments
+
+    
+    opts, args = getopt.getopt(sys.argv[1:], "f:m:t", ['filename', 'message'])
+        getopt.getopt(<input_string>, <flags>, [<description for flags>])
+        "f:" means -f + message string after
+        "m:" means -m + message string after
+        "t" means -t without message string
+        eg" -f "filename.txt" -m "this is my message" -t
+
+    print(opts)
+    print(args)
+
+    for opt, value in opts:
+        if opt == '-f':
+            filename = value
+        if opt == '-m':
+            message = value
+
+    cmd: python e:\SelfLearning\Python\test.py -f "myFile.txt" -m "This is my message"
+    

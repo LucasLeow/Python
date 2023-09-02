@@ -1,0 +1,11 @@
+== Multithreads ==
+    - tasks exist within same process
+    - threads share same address space
+    - global variables data accessible by all threads
+
+== Multiprocesses ==
+    - process have own address space
+    - if want to communicate,
+        - shared memory
+        - message pipe etc.
+    - global variables data not shared between processes

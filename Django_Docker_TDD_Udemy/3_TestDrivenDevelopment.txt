@@ -1,0 +1,33 @@
+== Unit tests ==
+    - Code which tests code
+        1) Set up condition
+            - inputs to a function
+        2) Run a piece of code
+            - running a function
+            - calling API endpoint
+        3) check output of code
+            - using assertions
+
+    * Recommended that all developers write unit tests for all code developed
+        - ensure code running as expected
+        - catches any bugs / logical errors
+        - improves reliability of code / app
+        - will be notified if app not working as intended
+        
+== Test Driven Development (TDD) ==
+    - Is a kind of Development practice
+        1) Write test
+        2) Run test (Fails)
+        3) Add feature (code)
+        4) Run Test (pass)
+        5) Re-factor
+        6) test again
+
+    Benefits of writng test first:
+        - better understand code
+            - not just thinking of how to add feature
+            - actually thinking of ho to test feature of code
+
+== Test coverage ==
+    - How much of project has unit test in place
+    - Full coverage = all features have unit test
