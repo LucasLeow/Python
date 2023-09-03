@@ -1,0 +1,41 @@
+== What are Pytest Fixtures ==
+    - Tests are typically broken into 4 steps:
+        1) Arrange
+            - setup
+            - prepare everything required for test
+            - eg: to test adding to cart
+                - need to launch browser
+                - login
+                - browse items in products
+        2) Act
+            - clicking the "add item to cart"
+        3) Assert
+            - verify if item has been added
+            - check the cart if item added is really added
+        4) Cleanup
+            - logging off browser, closing app
+
+   - Fixtures -
+    - Everything in the "Arrange" and "Cleanup" steps
+
+
+== Implementing Fixtures ==
+
+    Inside test_addItem.py:
+
+        import pytest
+
+        @pytest.fixture or @pytest.yield_fixture() <- old version of pytest, syntax may still exist
+        def setUp(): # code will actually be written to perform these actions, then selenium will execute
+            print("Launch Browser")
+            print("Login")
+            print("Browse Products")
+            yield
+            print("Logoff")
+            print("Close browser")
+
+        def testAddItemToCart(setUp):
+            print("Item added succesfully")
+
+        def testRemoveItemFromCart(setUp):
+            print("Item removed successfully")
