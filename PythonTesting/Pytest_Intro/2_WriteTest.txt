@@ -1,0 +1,33 @@
+keywords:
+    - Naming conventions for Pytest
+    - running test files
+
+== Naming conventions for Pytest ==
+    - in order for python files to be recognized as test file
+
+    - start with test_*.py
+        eg:
+            test_login.py
+
+    - end with *_test.py
+        eg:
+            login_test.py
+
+    - Any method within test file considered tests
+    - method names must also follow convention
+        eg:
+        def testLogin():
+            print("Login Successful")
+
+        def testLogoff():
+            print("Logoff Successful")
+
+        def testCalc():
+            assert 2+2 == 4
+
+== running test files ==
+    - cannot just run python file
+    - must run with pytest framework
+    1) inside pycharm -> top right corner -> dropdown -> edit configuration
+    2) add new config -> pytest -> provide path to test file -> apply -> ok
+    3) simply run (shift + F10) the file (since path already provided)

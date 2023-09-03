@@ -1,0 +1,12 @@
+== Pytest ==
+    - framework for testing
+    - can write simple tests
+    - can scale to complex functional testing for apps / libraries
+
+    - pip install -U pytest
+
+
+    - Concept of testing -
+        - Not just about writing test script / emulate user action
+        - also to get certain value out of testing
+            - test case should verify certain results / outcome
