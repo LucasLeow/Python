@@ -1,0 +1,35 @@
+== Purpose of grouping test files ==
+    - some tests are typically performed after certain stages in a project
+    - will occur all the time, regardless of project
+    - want to group these tests together for ease of execution
+    - also used in test automation after particular builds
+
+
+== How to group testcases ==
+    - by using decorators (aka annotations in Java)
+    - then in CLI, use -m <decoratorName> to execute tests with given decorator
+    - these are custom markers (custom name provided, there are built-in markers (see below) section)
+
+    eg:
+
+    inside test_login.py:
+
+        import pytest
+
+        # @pytest.mark.<marker_name>
+
+        @pytest.mark.sanitycheck
+        def testCalc():
+            assert 2+2 == 4
+
+    cmd:
+    pytest <path_to_dir> -m sanitycheck
+
+
+== Built-in Markers ==
+
+@pytest.mark.skip(reason="no way of currently testing this") # skip method in test file
+@pytest.mark.xfail # force method to fail regardless upon run (expected failure)
+    - typically used when test is not yet implemented, just declared
+    - mark xfail first to test other files, then implement later
+    - any methods that actually fail will not be flagged since xfail provided

@@ -1,0 +1,25 @@
+== Pytest CLI ==
+    - executing test files using pytest in CLI
+
+    - typically used, especially for more complex projects
+        - need to run multiple tests
+    - use together with jenkins to build a job
+
+
+    1) go to directory / package path where tests are located
+    2) type "pytest" in command to execute
+
+    Alternatively:
+    1) At any directory
+    2) pytest <path to dir containing tests>
+
+    pytest -v <path> : provides info on each method within test files
+    pytest -v -s <path> : provides execution of each test method as well
+    pytest <path> -k log : execute test file methods with "log" within method name
+
+
+    * Pytest will look into all dir & subdir for files with convention:
+        *_test.py
+        test_*.py
+
+
