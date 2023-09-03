@@ -5,3 +5,16 @@ Sections
     - Setting up new Django project
     - Linting & Testing
     - Using Docker compose
+
+
+== Docker for Development ==
+    - consistent dev & prod environment
+        - same image for dev & prod
+    - easier collab
+    - install dependencies using code (Dockerfile)
+    - easier cleanup(project end, just delete docker image)
+
+    - Development Setup -
+        1) Define Dockerfile
+        2) Create Docker Compose config
+        3) Run commands via Docker Compose

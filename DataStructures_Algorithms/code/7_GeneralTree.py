@@ -1,7 +1,6 @@
 class TreeNode:
-    def __init__(self, name, designation):
-        self.name = name
-        self.designation = designation
+    def __init__(self, data):
+        self.data = data
         self.children = []
         self.parent = None
 
@@ -10,19 +9,15 @@ class TreeNode:
             child.parent = self
             self.children.append(child)
 
-    def print_tree(self, type):
-        spaces = ' ' * self.get_level() * 3
-        prefix = spaces + '|__' if self.parent else ''
-        if (type == "name"):
-            print(prefix, self.data)
-        elif (type == "designation"):
-            print(prefix, self.designation)
+    def print_tree(self):
         # Tree is recursive data structure
         # Printing will also be recursive
-
+        spaces = ' ' * self.get_level() * 3
+        prefix = spaces + '|__' if self.parent else ''
+        print(prefix, self.data)
         if len(self.children) > 0:
             for child in self.children:
-                child.print_tree(type)
+                child.print_tree()
 
     def get_level(self):
         level = 0
