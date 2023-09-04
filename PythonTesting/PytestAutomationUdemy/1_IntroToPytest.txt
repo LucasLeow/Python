@@ -1,0 +1,53 @@
+== Pytest is a testing Framework ==
+    - added helpful features
+    - more focus on writing and adding tests
+    - auto detect tests based on naming conventions
+    - possible to group & mark tests together
+    - uses python assert keyword
+    - possible to integrate into CI/CD
+    - can include fixtures & parameterization
+
+    - similar to testNG / JUnit in Java
+
+
+== Pytest conventions ==
+    * pytest will search test files in dir & sub dir
+    - file convention:
+        - test_<desiredName>.py
+        - <desiredName>_test.py
+
+    - test method convention: (mandatory to name it like that)
+        def test_<desiredName>():
+            assert 5 + 5 == 10
+
+    - assert: test if condition returns true
+    * Practice is to not use multiple asserts in same test
+        - write multiple test if necessary
+
+
+    cmd to execute:
+        pytest -v <path to proj dir>
+        OR
+        pytest -v <path to specific file>
+
+
+
+eg test:
+
+    def test_a2():
+        assert 9/5 == 1.5, "failed test intentionally"
+
+== Good Practices ==
+    - Name all test files with test_<someName>.py or <someName>_test.py
+    - name all functions with test_<functionName>.py
+    - test classes should be Test<someName>.py, class Test<someName>:
+    - group all tests into classes / packages (all packages will have empty __init__.py file)
+
+== Pytest cache ==
+    - store results of last test run
+    - can provide --lf flag to only run failed methods
+    - can provide --ff flag to run failures first then rest of the tests
+    - --nf : run new tests first then rest of the tests
+
+    pytest --cache-show : cmd to show cache info
+    pytest --sw : stop at first failed test to troubleshoot

@@ -1,0 +1,23 @@
+== Test Class ==
+    - for grouping multiple tests
+    - not absolutely required
+
+
+
+    class TestMyStuff:
+        def test_type(self):
+            assert type(1) == int
+
+        def test_strs(self):
+            assert str.upper('python') == 'PYTHON'
+
+        def test_title(self):
+            assert 'pytest'.capitalize() == 'Pytest'
+
+
+
+# run specific class
+pytest -v <proj-dir>/test/test_module01.py::<class_name>
+
+# run specific method
+pytest -v <proj-dir>/test/test_module01.py::<class_name>::<method_name>

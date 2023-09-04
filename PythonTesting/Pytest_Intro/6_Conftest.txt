@@ -1,0 +1,82 @@
+== conftest.py file ==
+    - test config file
+    - can be used for sharing fixtures across classes, modules, packages, sessions
+        - typically for testing common methods
+        - eg: setUp() method may be common across
+
+        @pytest.fixture or @pytest.yield_fixture() <- old version of pytest, syntax may still exist
+        def setUp(): # code will actually be written to perform these actions, then selenium will execute
+            print("Launch Browser")
+            print("Login")
+            print("Browse Products")
+            yield
+            print("Logoff")
+            print("Close browser")
+
+
+        * If have 100 test_.py files requiring setUp(), better to externalize setUp() method
+
+        Solution: using conftest.py
+
+        1) create conftest.py
+        2) place all relevant codes within conftest.py
+
+        @pytest.fixture # or @pytest.yield_fixture() <- old version of pytest, syntax may still exist
+        def setUp(): # code will actually be written to perform these actions, then selenium will execute
+            print("Launch Browser")
+            print("Login")
+            print("Browse Products")
+            yield
+            print("Logoff")
+            print("Close browser")
+
+         3) go to relevant python file requiring method
+
+         def test_add_item(setUp):
+            print("Item added successfully")
+
+         def test_calc(setUp):
+            print("calc successful")
+
+
+
+        * Above method still tedious, need to inject setUp() method into every test method
+        * solution:
+
+        @pytest.fixture(autouse=True) # or @pytest.yield_fixture() <- old version of pytest, syntax may still exist
+        def setUp(): # code will actually be written to perform these actions, then selenium will execute
+            print("Launch Browser")
+            print("Login")
+            print("Browse Products")
+            yield
+            print("Logoff")
+            print("Close browser")
+
+
+        inside relevant python test files:
+
+        # don't need to inject fixure because autouse=True
+        def test_add_item():
+            print("Item added successfully")
+
+         def test_calc():
+            print("calc successful")
+
+
+== Scope ==
+    - fixtures created when first requested by test, destroyed based on scope
+       - function scope (default, fixture destroyed after function end)
+       - class scope (fixture destroyed after last test in class)
+       - module scope (fixture destroyed after last test in module)
+       - package scope (fixture destroyed after last test in package)
+       - session scope
+
+
+       @pytest.fixture(scope="session", autouse=True)
+       def setUp():
+            print("Launch Browser")
+            print("Login")
+            print("Browse Products")
+            yield
+            print("Logoff")
+            print("Close browser")

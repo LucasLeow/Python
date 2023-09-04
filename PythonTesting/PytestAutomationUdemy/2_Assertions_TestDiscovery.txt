@@ -1,0 +1,71 @@
+keywords
+    - Assertions
+    - raise assertion
+
+== Assertions ==
+    - one of main component of tests
+    - typically "assertions" package created
+    - uses "assert" keyword
+
+
+    - assert -
+        - continue execution if given condition evaluates to True
+        - raise AssertionError if condition false
+        - use single assert per test
+
+    Types of assert statements:
+
+        assert 2 < 4
+        assert 2 == 2
+
+        assert 1 # always True
+        assert 0 # always False (Exception Raised)
+
+        assert "request" == "request"
+
+        assert 1 in divmod(9, 5) # output of divmod(9, 5) = (1, 4) (<division>, <mod>)
+        assert 'put' in 'this is test'
+
+        assert [1, 2] in [1, 2, 4]
+
+        assert type(1) == int
+        assert type(1.3) == float
+
+    - Benefits of __init__.py
+        - specify dir as python package
+        - allow for multiple python file names to be similar in same project provided not in same package
+
+
+== raise assertion ==
+    - expecting exception / error
+    - eg: having api that will throw error
+    - want to test that we are getting the error
+    - i.e error should pass test
+    - usually done in unit / integration test
+
+    - testing negative scenario as pass
+
+    import pytest
+
+    # assertion will pass
+    def test_case01():
+        with pytest.raises(Exception):
+            assert (1/0)
+
+    # Better to be more specific with exception
+    def test_case01():
+        with pytest.raises(ZeroDivisionError):
+            assert (1/0)
+
+    def test_case02():
+        with pytest.raises(Exception) as excinfo:
+            assert (1,2,3) == (1,2,4)
+        print(excinfo)
+
+    def func1():
+        raise ValueError("Exception func1 raised")
+
+    def test_case03():
+        with pytest.raises(Exception) as excinfo:
+            func1()
+        assert (str(excinfo)) == 'Exception func1 raised'

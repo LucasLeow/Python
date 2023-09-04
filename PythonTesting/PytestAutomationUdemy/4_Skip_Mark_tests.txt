@@ -1,0 +1,28 @@
+keywords:
+    - skipping test
+    - skipif using custom function
+
+
+== skipping test ==
+
+import pytest
+import sys
+
+# will skip all tests if platform is 'win32'
+pytestmark = pytest.mark.skipif(sys.platform == 'win32', reason="will run only on linux")
+
+@pytest.mark.skip(reason="cannot test for now")
+def test_case01():
+    assert type(5) == float
+
+@pytest.mark.skipif(sys.version_info > (3,6), reason="does not work if python version >3.6")
+def test_case02():
+    assert someFunc() == 32
+
+
+
+== skipif using custom function ==
+
+@pytest.mark.skipif(pytest.__version__ < '5.5.0', reason="pytest version not up to date")
+def test_case02():
+    assert cent_to_fah() == 32
